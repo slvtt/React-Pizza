@@ -16,7 +16,7 @@
   &__title {
     font-size: 20px;
     font-weight: 900;
-    letter-spacing: 1%;
+    letter-spacing: normal;
     margin-bottom: 20px;
   }
 
@@ -47,6 +47,10 @@
           box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.04);
           border-radius: 5px;
           cursor: auto;
+        }
+        &.disabled {
+          opacity: 0.4;
+          pointer-events: none;
         }
       }
     }

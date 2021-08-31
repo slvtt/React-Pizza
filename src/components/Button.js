@@ -1,6 +1,7 @@
 import classNames from "classnames";
+import PropTypes from "prop-types";
 
-function Button ({className,outline,children}) {
+function Button ({className,outline,children,onClick}) {
     return(
         <button
         className={classNames('button',className,{
@@ -9,6 +10,10 @@ function Button ({className,outline,children}) {
             {children}
         </button>
     )
+}
+
+Button.propTypes = {
+    onClick:PropTypes.func
 }
 
 export default Button
