@@ -2,17 +2,18 @@ import './App.css';
 import {Header} from './components'
 import {Cart, Home} from "./pages";
 import {Route} from "react-router";
-import {useEffect, useState} from "react";
+
+import {useEffect} from "react";
 import axios from "axios";
+import {setPizzas} from "./redux/actions/pizzas";
 
 function App() {
-    const [pizzas,setPizzas] = useState([]);
 
     useEffect(()=>{
         axios.get('http://localhost:3000/db.json')
             .then(res => {
                 const arrayPizzas = res.data.pizzas;
-                setPizzas(arrayPizzas)
+                console.log(arrayPizzas)
             })
     },[])
   return (
@@ -20,7 +21,7 @@ function App() {
        <div className="wrapper">
            <Header />
            <div className="content">
-               <Route exact path='/' render={()=> <Home items={pizzas} />} />
+               <Route exact path='/' render={()=> <Home items={[]} />} />
                <Route exact path='/cart' component={Cart} />
            </div>
        </div>
