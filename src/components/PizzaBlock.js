@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import classNames from "classnames";
 import PropTypes from 'prop-types';
+import {nanoid} from "nanoid";
 
 function PizzaBlock({name,image,price,types,sizes}) {
     const typesPizza = ['тонкое','традиционное'];
@@ -16,7 +17,9 @@ function PizzaBlock({name,image,price,types,sizes}) {
         setActiveSize(index)
     }
     return (
-        <div className="pizza-block">
+        <div
+            key={nanoid(4)}
+            className="pizza-block">
             <img
                 className="pizza-block__image"
                 src={image}
@@ -28,6 +31,7 @@ function PizzaBlock({name,image,price,types,sizes}) {
                     {
                         typesPizza.map((type,index)=>(
                             <li
+                                key={nanoid(4)}
                                 onClick={()=>onSelectType(index)}
                                 className={classNames({
                                     'active':activeType === index,
@@ -41,6 +45,7 @@ function PizzaBlock({name,image,price,types,sizes}) {
                     {
                         availableSizes.map((size,index)=>(
                             <li
+                                key={nanoid(4)}
                                 onClick={()=>onSelectSize(index)}
                                 className={classNames({
                                     'active':activeSize === index,

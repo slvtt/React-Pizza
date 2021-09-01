@@ -1,7 +1,7 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {nanoid} from "nanoid";
 
-function SortPopup({items}) {
+const SortPopup = React.memo(function SortPopup({items}) {
     const [visiblePop, setVisiblePop] = useState(false);
     const [activeItem,setActiveItem] = useState(0);
     const sortRef = useRef();
@@ -63,6 +63,6 @@ function SortPopup({items}) {
             }
         </div>
     );
-}
+})
 
 export default SortPopup;
