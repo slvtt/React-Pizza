@@ -3,7 +3,7 @@ import classNames from "classnames";
 import PropTypes from 'prop-types';
 import {nanoid} from "nanoid";
 
-function PizzaBlock({name,image,price,types,sizes}) {
+function Index({name,image,price,types,sizes}) {
     const typesPizza = ['тонкое','традиционное'];
     const availableSizes = [26,30,40];
     const [activeType,setActiveType] = useState(types[0]);
@@ -79,17 +79,17 @@ function PizzaBlock({name,image,price,types,sizes}) {
     );
 }
 
-PizzaBlock.propTypes = {
+Index.propTypes = {
     name:PropTypes.string.isRequired,
     image:PropTypes.string.isRequired,
     price:PropTypes.number.isRequired,
     sizes:PropTypes.arrayOf(PropTypes.number).isRequired,
-    types:PropTypes.arrayOf(PropTypes.number).isRequired
+    types:PropTypes.arrayOf(PropTypes.number).isRequired,
 };
 
-PizzaBlock.defaultProps = {
+Index.defaultProps = {
     types:[],
-    sizes:[]
+    sizes:[],
 }
 
-export default PizzaBlock;
+export default Index;

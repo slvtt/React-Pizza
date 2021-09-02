@@ -1,11 +1,10 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {nanoid} from "nanoid";
 
-const SortPopup = React.memo(function SortPopup({items}) {
+const SortPopup = React.memo(function SortPopup({items,activeSortType,onClickSortType}) {
     const [visiblePop, setVisiblePop] = useState(false);
-    const [activeItem,setActiveItem] = useState(0);
     const sortRef = useRef();
-    const activeLabel = items[activeItem].name;
+    const activeLabel = items.find(obj => obj.type === activeSortType).name;
 
     const toggleVisiblePopup = () => {
         setVisiblePop(!visiblePop)
@@ -18,7 +17,7 @@ const SortPopup = React.memo(function SortPopup({items}) {
     }
 
     const selectedItem = (index) => {
-        setActiveItem(index)
+        onClickSortType(index)
         setVisiblePop(false)
     }
 
@@ -49,10 +48,10 @@ const SortPopup = React.memo(function SortPopup({items}) {
                 <div className="sort__popup">
                     <ul>
                         {
-                            items.map((item,index) => (
+                            items.map((item) => (
                                 <li
-                                    className={activeItem === index ? 'active': ''}
-                                    onClick={() => selectedItem(index)}
+                                    className={activeSortType === item.type ? 'active': ''}
+                                    onClick={() => selectedItem(item)}
                                     key={nanoid(4)}>
                                     {item.name}
                                 </li>
@@ -64,5 +63,9 @@ const SortPopup = React.memo(function SortPopup({items}) {
         </div>
     );
 })
+
+SortPopup.defaultProps = {
+    items:[]
+}
 
 export default SortPopup;
