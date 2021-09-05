@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 function Button ({className,outline,children,onClick}) {
     return(
         <button
+            onClick={onClick}
         className={classNames('button',className,{
             'button-outline':outline,
         })}>

@@ -5,6 +5,7 @@ import {nanoid} from "nanoid";
 
 import {setCategory,setSortBy} from "../redux/actions/filters";
 import {fetchPizzas} from "../redux/actions/pizzas";
+import {addPizzaToCart} from "../redux/actions/cart";
 
 const categories = ['Мясные','Вегетарианская','Гриль','Острые','Закрытые'];
 const sortItems = [
@@ -17,12 +18,13 @@ function Home() {
 
     const items = useSelector(({pizzas,filters})=> pizzas.items);
     const isLoaded = useSelector(({pizzas}) =>pizzas.isLoaded);
+    const cartItems = useSelector(({cart})=> cart.items)
     const {category,sortBy} = useSelector(({filters})=> filters)
     const dispatch = useDispatch();
 
     useEffect(()=>{
         dispatch(fetchPizzas(sortBy,category))
-    },[category,sortBy]);
+    },[category,sortBy,dispatch]);
 
     const onSelectCategory = useCallback(index => {
         dispatch(setCategory(index))
@@ -31,6 +33,11 @@ function Home() {
     const onSelectSortType = useCallback(type => {
         dispatch(setSortBy(type))
     },[dispatch])
+
+    const handleAddPizzaToCart = (obj) => {
+      dispatch(addPizzaToCart(obj))
+    }
+
     return (
         <div className="container">
             <div className="content__top">
@@ -51,7 +58,10 @@ function Home() {
                      isLoaded
                          ? items.map(item => <PizzaBlock
                         key={nanoid(4)}
+                        addedCount={cartItems[item.id] && cartItems[item.id].items.length}
                         name={item.name}
+                        onClickAddPizza={handleAddPizzaToCart}
+                        id={item.id}
                         image={item.imageUrl}
                         price={item.price}
                         types={item.types}

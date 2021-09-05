@@ -2,12 +2,13 @@ import React, {useState} from 'react';
 import classNames from "classnames";
 import PropTypes from 'prop-types';
 import {nanoid} from "nanoid";
+import {Button} from "../index";
 
-function Index({name,image,price,types,sizes}) {
+function Index({id,name,image,price,types,sizes,onClickAddPizza,addedCount}) {
     const typesPizza = ['тонкое','традиционное'];
     const availableSizes = [26,30,40];
     const [activeType,setActiveType] = useState(types[0]);
-    const [activeSize,setActiveSize]=useState(sizes[0]);
+    const [activeSize,setActiveSize]=useState(0);
 
 
     const onSelectType = (index) =>{
@@ -15,6 +16,18 @@ function Index({name,image,price,types,sizes}) {
     }
     const onSelectSize = (index) => {
         setActiveSize(index)
+    }
+
+    const handleOnAddPizza = () => {
+        const obj = {
+            id,
+            name,
+            image,
+            price,
+            size:availableSizes[activeSize],
+            type:typesPizza[activeType]
+        };
+        onClickAddPizza(obj)
     }
     return (
         <div
@@ -58,7 +71,7 @@ function Index({name,image,price,types,sizes}) {
             </div>
             <div className="pizza-block__bottom">
                 <div className="pizza-block__price">от {price} ₽</div>
-                <div className="button button--outline button--add">
+                <Button onClick={handleOnAddPizza} className="button button--outline button--add">
                     <svg
                         width="12"
                         height="12"
@@ -72,8 +85,8 @@ function Index({name,image,price,types,sizes}) {
                         />
                     </svg>
                     <span>Добавить</span>
-                    <i>2</i>
-                </div>
+                    {addedCount&&<i>{addedCount}</i>}
+                </Button>
             </div>
         </div>
     );
@@ -85,6 +98,8 @@ Index.propTypes = {
     price:PropTypes.number.isRequired,
     sizes:PropTypes.arrayOf(PropTypes.number).isRequired,
     types:PropTypes.arrayOf(PropTypes.number).isRequired,
+    onClickAddPizza:PropTypes.func,
+    addedCount:PropTypes.number
 };
 
 Index.defaultProps = {
