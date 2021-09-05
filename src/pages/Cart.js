@@ -15,6 +15,7 @@ function Cart() {
         return items[key].items[0]
     })
 
+
     const onClearCart = () => {
         if (window.confirm('Вы действительно хотите очистить корзину?')){
             dispatch(clearCart())
@@ -71,6 +72,7 @@ function Cart() {
                                     id={obj.id}
                                     name={obj.name}
                                     type={obj.type}
+                                    img={obj.image}
                                     size={obj.size}
                                     totalPrice={items[obj.id].totalPrice}
                                     totalCount ={items[obj.id].items.length}
