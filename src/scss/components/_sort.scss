@@ -1,6 +1,7 @@
 @import 'variables';
 
 .sort {
+  margin-left: 20px;
   position: relative;
   &__label {
     display: flex;
@@ -8,10 +9,10 @@
 
     svg {
       margin-right: 8px;
-      transition: all 0.4s ease-out;
       transform: rotate(180deg);
-      &.rotated{
-        transform: rotate(0deg);
+
+      &.rotated {
+        transform: rotate(0);
       }
     }
 
